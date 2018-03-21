@@ -3,11 +3,14 @@ package com.guto1906.javacompleto.domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Endereco implements Serializable{
@@ -23,11 +26,12 @@ public class Endereco implements Serializable{
 	private String bairro;
 	private String cep;
 	
-	@ManyToOne
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	

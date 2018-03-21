@@ -9,11 +9,13 @@ import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.guto1906.javacompleto.domain.enums.TipoCliente;
 
 @Entity
@@ -30,11 +32,12 @@ public class Cliente implements Serializable{
 	//para armazenar o codigo, alterar de TipoCliente para Integer e corrigir o construtor
 	private Integer tipo;
 	
-	@OneToMany(mappedBy="cliente")	
+	@JsonManagedReference
+	@OneToMany(mappedBy="cliente", fetch = FetchType.EAGER)	
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	//Set é um conjunto que não pode ter elemento repetido
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
