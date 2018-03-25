@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,18 +26,20 @@ public class Pedido implements Serializable{
 	private Integer id;
 	private Date instante;
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")	
+	
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido", fetch=FetchType.EAGER)	
 	private Pagamento pagamento;
 	
-	@ManyToOne
+	
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="enderco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
 	
-	@OneToMany(mappedBy="id.pedido")
+	@OneToMany(mappedBy="id.pedido", fetch=FetchType.EAGER)
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Pedido() {

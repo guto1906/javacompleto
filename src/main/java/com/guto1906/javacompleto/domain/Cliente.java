@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.guto1906.javacompleto.domain.enums.TipoCliente;
 
 @Entity
@@ -32,15 +32,16 @@ public class Cliente implements Serializable{
 	//para armazenar o codigo, alterar de TipoCliente para Integer e corrigir o construtor
 	private Integer tipo;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy="cliente", fetch = FetchType.EAGER)	
+	
+	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER)	
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	//Set é um conjunto que não pode ter elemento repetido
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
