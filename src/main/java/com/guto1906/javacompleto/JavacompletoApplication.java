@@ -13,6 +13,7 @@ import com.guto1906.javacompleto.domain.Cidade;
 import com.guto1906.javacompleto.domain.Cliente;
 import com.guto1906.javacompleto.domain.Endereco;
 import com.guto1906.javacompleto.domain.Estado;
+import com.guto1906.javacompleto.domain.ItemPedido;
 import com.guto1906.javacompleto.domain.Pagamento;
 import com.guto1906.javacompleto.domain.PagamentoComBoleto;
 import com.guto1906.javacompleto.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.guto1906.javacompleto.repositories.CidadeRepository;
 import com.guto1906.javacompleto.repositories.ClienteRepository;
 import com.guto1906.javacompleto.repositories.EnderecoRepository;
 import com.guto1906.javacompleto.repositories.EstadoRepository;
+import com.guto1906.javacompleto.repositories.ItemPedidoRepository;
 import com.guto1906.javacompleto.repositories.PagamentoRepository;
 import com.guto1906.javacompleto.repositories.PedidoRepository;
 import com.guto1906.javacompleto.repositories.ProdutoRepository;
@@ -51,6 +53,9 @@ public class JavacompletoApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JavacompletoApplication.class, args);
@@ -121,6 +126,23 @@ public class JavacompletoApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
+		
+		
+		
+		
 		
 		
 	
