@@ -3,10 +3,12 @@ package com.guto1906.javacompleto.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.guto1906.javacompleto.domain.Categoria;
 import com.guto1906.javacompleto.repositories.CategoriaRepository;
+import com.guto1906.javacompleto.services.exceptions.DataIntegrityException;
 import com.guto1906.javacompleto.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -30,6 +32,15 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return dao.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+		dao.deleteById(id);
+		} catch(DataIntegrityViolationException e){
+			throw new DataIntegrityException("Não é possível excluir uma categoria com produtos associados");
+		}
 	}
 
 }
