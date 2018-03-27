@@ -1,5 +1,6 @@
 package com.guto1906.javacompleto.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,10 @@ public class CategoriaService {
 		} catch(DataIntegrityViolationException e){
 			throw new DataIntegrityException("Não é possível excluir uma categoria com produtos associados");
 		}
+	}
+	
+	public List<Categoria> findAll(){
+		return dao.findAll();
 	}
 
 }
