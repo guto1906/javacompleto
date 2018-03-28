@@ -66,6 +66,15 @@ public class JavacompletoApplication implements CommandLineRunner {
 		//Instanciar objetos categoria e produtos do pacote Domain
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
+		Categoria cat3 = new Categoria(null, "Servidores");
+		Categoria cat4 = new Categoria(null, "Switchs");
+		Categoria cat5 = new Categoria(null, "Roteadores");
+		Categoria cat6 = new Categoria(null, "Cabeamentos");
+		Categoria cat7 = new Categoria(null, "Acessórios");
+		Categoria cat8 = new Categoria(null, "Dados");
+		Categoria cat9 = new Categoria(null, "Recursos Humanos");
+		Categoria cat10 = new Categoria(null, "Financeiro");
+		
 		
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
@@ -80,7 +89,8 @@ public class JavacompletoApplication implements CommandLineRunner {
 		p3.getCategorias().addAll(Arrays.asList(cat1));
 		
 		//Adicionar os objetos criados na base de dados usando Repository(DAO)
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3,
+				cat4, cat5, cat6, cat7, cat8, cat9, cat10));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		
 		//Instanciar os objetos Estados e Cidade do pacote Domain
