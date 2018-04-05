@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.guto1906.javacompleto.domain.Categoria;
+import com.guto1906.javacompleto.dto.CategoriaDTO;
 import com.guto1906.javacompleto.repositories.CategoriaRepository;
 import com.guto1906.javacompleto.services.exceptions.DataIntegrityException;
 import com.guto1906.javacompleto.services.exceptions.ObjectNotFoundException;
@@ -59,6 +60,10 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return dao.findAll(pageRequest);
 		
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 
 }
