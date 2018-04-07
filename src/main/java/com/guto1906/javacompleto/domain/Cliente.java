@@ -32,8 +32,7 @@ public class Cliente implements Serializable{
 	//para armazenar o codigo, alterar de TipoCliente para Integer e corrigir o construtor
 	private Integer tipo;
 	
-	
-	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER)	
+	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	//Set é um conjunto que não pode ter elemento repetido
@@ -148,6 +147,12 @@ public class Cliente implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + ", cpfOuCnpj=" + cpfOuCnpj + ", tipo="
+				+ tipo + ", enderecos=" + enderecos + ", telefones=" + telefones + "]";
 	}
 	
 	

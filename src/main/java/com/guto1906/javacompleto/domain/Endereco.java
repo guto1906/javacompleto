@@ -31,7 +31,7 @@ public class Endereco implements Serializable{
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)	
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	
@@ -99,7 +99,7 @@ public class Endereco implements Serializable{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
