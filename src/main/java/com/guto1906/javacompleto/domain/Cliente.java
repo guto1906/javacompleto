@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ public class Cliente implements Serializable{
 	//para armazenar o codigo, alterar de TipoCliente para Integer e corrigir o construtor
 	private Integer tipo;
 	
-	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	//Set é um conjunto que não pode ter elemento repetido
