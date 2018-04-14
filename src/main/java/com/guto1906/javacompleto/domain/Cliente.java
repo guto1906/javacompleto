@@ -35,9 +35,11 @@ public class Cliente implements Serializable{
 	private String cpfOuCnpj;
 	//para armazenar o codigo, alterar de TipoCliente para Integer e corrigir o construtor
 	private Integer tipo;
-	
+		
 	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	private List<Endereco> enderecos = new ArrayList<>();
+	//private List<Endereco> enderecos = new ArrayList<>();
+	//Transformado em um conjunto para não duplicar a lista com os endereços ao buscar um cliente
+	private Set<Endereco> enderecos = new HashSet<>();
 	
 	//Set é um conjunto que não pode ter elemento repetido
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -104,11 +106,11 @@ public class Cliente implements Serializable{
 		this.tipo = tipo.getCod();
 	}
 
-	public List<Endereco> getEnderecos() {
+	public Set<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(List<Endereco> enderecos) {
+	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 
