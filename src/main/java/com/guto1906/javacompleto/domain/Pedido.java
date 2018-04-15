@@ -40,7 +40,7 @@ public class Pedido implements Serializable{
 	private Cliente cliente;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="enderco_de_entrega_id")
+	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
 	
 	@OneToMany(mappedBy="id.pedido", fetch=FetchType.EAGER)
