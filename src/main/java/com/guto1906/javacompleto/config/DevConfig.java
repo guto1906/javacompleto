@@ -9,9 +9,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.guto1906.javacompleto.services.DBService;
+import com.guto1906.javacompleto.services.EmailService;
+import com.guto1906.javacompleto.services.SmtpMailService;
 
 @Configuration
-@Profile("heroku")
+@Profile("postgres")
 public class DevConfig {
 
 	@Autowired
@@ -29,6 +31,11 @@ public class DevConfig {
 
 		dbService.instantiateTestDataBase();
 		return true;
+	}
+	
+	@Bean
+	public EmailService emailService() {
+		return new SmtpMailService();
 	}
 
 }
