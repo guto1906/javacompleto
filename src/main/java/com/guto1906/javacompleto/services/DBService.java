@@ -20,6 +20,7 @@ import com.guto1906.javacompleto.domain.PagamentoComCartao;
 import com.guto1906.javacompleto.domain.Pedido;
 import com.guto1906.javacompleto.domain.Produto;
 import com.guto1906.javacompleto.domain.enums.EstadoPagamento;
+import com.guto1906.javacompleto.domain.enums.Perfil;
 import com.guto1906.javacompleto.domain.enums.TipoCliente;
 import com.guto1906.javacompleto.repositories.CategoriaRepository;
 import com.guto1906.javacompleto.repositories.CidadeRepository;
@@ -129,14 +130,23 @@ public class DBService {
 				Cliente cli1 = new Cliente(null, "Maria Silva", "email_Real", "36378912377", TipoCliente.PESSOAFÍSICA, pe.encode("123"));
 				cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 				
+				Cliente cli2 = new Cliente(null, "Mauro Silva", "email_Real2", "95654009060", TipoCliente.PESSOAFÍSICA, pe.encode("123"));
+				cli2.addPerfil(Perfil.ADMIN);
+				cli2.getTelefones().addAll(Arrays.asList("12344321", "67899876"));
+				
 				Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
 				Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
 				
+				Endereco e3 = new Endereco(null, "Avenida Meier", "100", null, "Centro", "38777013", cli2, c2);
+				
 				cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 				
+				cli2.getEnderecos().addAll(Arrays.asList(e3));
 				
-				clienteRepository.saveAll(Arrays.asList(cli1));
-				enderecoRepository.saveAll(Arrays.asList(e1, e2));
+				
+				clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+				enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
+				
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 				
